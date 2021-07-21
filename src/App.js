@@ -1,11 +1,10 @@
 import './App.css';
 import { Button } from 'antd';
-// @import '~antd/dist/antd.css';
+import 'antd/dist/antd.dark.css';
 
 function App() {
   return (
     <div className="App">
-      Yahoo
       <Button type="primary">Button</Button>
     </div>
   );

@@ -1,12 +1,14 @@
 .App {
-  background-color: #282c34;
+  font-family: 'Orbitron', sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #6cdaf8;
+  background-color: #130f40;
+  background-image: linear-gradient(315deg, #130f40 0%, #000000 74%);
 }
 
 /* nice color combination, keep it for later */
