@@ -1,5 +1,6 @@
 import { getPoints } from '../api';
 import { FALLBACK_ERROR_MESSAGE } from '../constants';
+import { CLEAR_DATE_TIME_SLICE } from './common';
 
 const initialState = {
   buyPoint: { dateTime: '', price: 0 },
@@ -23,6 +24,13 @@ export function millionaireReducer(state = initialState, { type, payload }) {
     }
     case GET_BUY_SELL_POINTS_ERROR: {
       return { ...initialState, error: payload.message };
+    }
+    case CLEAR_DATE_TIME_SLICE: {
+      return {
+        ...state,
+        buyPoint: { ...initialState.buyPoint },
+        sellPoint: { ...initialState.sellPoint },
+      };
     }
     default: {
       return state;

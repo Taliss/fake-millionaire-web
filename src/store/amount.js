@@ -1,3 +1,5 @@
+import { CLEAR_DATE_TIME_SLICE } from './common';
+
 const initialState = {
   current: 0,
   profitInfo: {
@@ -15,6 +17,9 @@ export function amountReducer(state = initialState, { type, payload }) {
     }
     case PROFIT_INFO_CHANGED: {
       return { ...state, profitInfo: { ...payload } };
+    }
+    case CLEAR_DATE_TIME_SLICE: {
+      return { ...state, profitInfo: { ...initialState.profitInfo } };
     }
     default: {
       return state;

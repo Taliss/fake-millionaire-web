@@ -6,6 +6,7 @@ import {
   getBuySellPoints,
   getBuySellPointsStatus,
 } from '../../store/millionaire';
+import { clearDateTimeSlice } from '../../store/common';
 const { RangePicker } = DatePicker;
 
 export const DateTimePicker = () => {
@@ -13,12 +14,16 @@ export const DateTimePicker = () => {
   const status = useSelector(getBuySellPointsStatus);
 
   const [dateTimeValues, setDateTimeValues] = useState([]);
-  const [startDateTimeMoment, endDateTimeMoment] = dateTimeValues;
 
   const isLoading = status === 'loading';
-  const isDisabled = !startDateTimeMoment || !endDateTimeMoment;
+  const isDisabled = !dateTimeValues || !dateTimeValues.length;
 
   const onChange = (startEndTimeMoments) => {
+    console.log(startEndTimeMoments, ' tuka');
+    if (!startEndTimeMoments) {
+      console.log('a?');
+      dispatch(clearDateTimeSlice());
+    }
     setDateTimeValues(startEndTimeMoments);
   };
 
