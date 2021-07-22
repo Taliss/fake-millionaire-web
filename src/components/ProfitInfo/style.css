@@ -1,9 +1,6 @@
 .profitInfoWrapper {
-  display: flex;
-  flex-direction: column;
   padding-top: 10px;
   padding-bottom: 10px;
-  align-items: center;
   box-shadow: inset 0 0 10px rgb(48, 41, 124), 0 0 5px rgb(124, 111, 177);
   border-radius: calc(1px + 2vmin);
 }
@@ -14,5 +11,12 @@
 }
 
 .profitInfoText {
+  display: flex;
+  justify-content: center;
   color: #41c0e47a;
+}
+
+.buySellInfo {
+  display: flex;
+  justify-content: center;
 }

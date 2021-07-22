@@ -25,7 +25,7 @@ export const AmountInput = () => {
       precision={0}
       style={{ minWidth: 100 }}
       size="large"
-      max={100000}
+      max={10000}
       min={0}
       onChange={onChange}
       value={amount}

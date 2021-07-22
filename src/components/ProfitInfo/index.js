@@ -1,24 +1,34 @@
 import { useSelector } from 'react-redux';
 import { Typography, Divider } from 'antd';
-import { getBuySellPointsErrorStatus } from '../../store/millionaire';
+import { BuySellInfo } from './BuySellInfo';
+import { getBuySellBoints } from '../../store/millionaire';
+import { getProfitInfo } from '../../store/amount';
 import './style.css';
 
 const { Text } = Typography;
 
 export const ProfitInfo = () => {
-  const errorWhileFetching = useSelector(getBuySellPointsErrorStatus);
-
-  return !errorWhileFetching ? (
+  const { buyPoint, sellPoint } = useSelector(getBuySellBoints);
+  const { bought, sold, profit } = useSelector(getProfitInfo);
+  return (
     <div className="profitInfoWrapper">
-      <Text className="profitInfoText">Hello 123</Text>
+      <BuySellInfo
+        type="buy"
+        dateTimePoint={buyPoint}
+        className="buySellInfo"
+      />
       <Divider className="customDevider" />
-      <Text className="profitInfoText">Hello 123</Text>
+      <BuySellInfo
+        type="sell"
+        dateTimePoint={sellPoint}
+        className="buySellInfo"
+      />
       <Divider className="customDevider" />
-      <Text className="profitInfoText">Hello 123</Text>
+      <Text className="profitInfoText">Profit: {profit}</Text>
       <Divider className="customDevider" />
-      <Text className="profitInfoText">Hello 123</Text>
+      <Text className="profitInfoText">Bought: {bought}</Text>
       <Divider className="customDevider" />
-      <Text className="profitInfoText">Hello 123 nakraq</Text>
+      <Text className="profitInfoText">Sold: {sold}</Text>
     </div>
-  ) : null;
+  );
 };

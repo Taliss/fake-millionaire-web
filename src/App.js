@@ -8,7 +8,7 @@ import { Space } from 'antd';
 function App() {
   return (
     <div className="App">
-      <Space direction="vertical" size={20}>
+      <Space direction="vertical" size={40}>
         <HeaderSection />
         <ContentSection />
       </Space>

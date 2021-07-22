@@ -2,9 +2,8 @@ const initialState = {
   current: 0,
   profitInfo: {
     bought: 0,
+    sold: 0,
     profit: 0,
-    amountSpent: 0,
-    amountEarned: 0,
   },
 };
 
@@ -36,3 +35,5 @@ export const changeAmount = (amount) => ({
   type: AMOUNT_CHANGED,
   payload: amount,
 });
+
+const calculateProfit = () => {};
