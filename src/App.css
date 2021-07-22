@@ -1,17 +1,19 @@
 .App {
-  font-family: 'Orbitron', sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: start;
   font-size: calc(10px + 2vmin);
-  color: #6cdaf8;
   background-color: #130f40;
   background-image: linear-gradient(315deg, #130f40 0%, #000000 74%);
   padding-top: calc(10px + 10vmin);
 }
 
-.dataContainer {
-  border: 2px solid #6cdaf8;
+.gutter-row {
+  max-width: 90vw;
+  /* height: 60vh; */
+  display: flex;
+  justify-content: center;
+  background-color: yellow;
 }

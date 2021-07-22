@@ -1,0 +1,18 @@
+.profitInfoWrapper {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  align-items: center;
+  box-shadow: inset 0 0 10px rgb(48, 41, 124), 0 0 5px rgb(124, 111, 177);
+  border-radius: calc(1px + 2vmin);
+}
+
+.customDevider {
+  border-top: 1px solid rgb(48, 43, 70);
+  margin: 12px 0;
+}
+
+.profitInfoText {
+  color: #41c0e47a;
+}

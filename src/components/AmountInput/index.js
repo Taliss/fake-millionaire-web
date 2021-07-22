@@ -23,7 +23,7 @@ export const AmountInput = () => {
   return (
     <InputNumber
       precision={0}
-      style={{ minWidth: 150 }}
+      style={{ minWidth: 100 }}
       size="large"
       max={100000}
       min={0}

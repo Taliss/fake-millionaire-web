@@ -6,7 +6,6 @@ import {
   getBuySellPoints,
   getBuySellPointsStatus,
 } from '../../store/millionaire';
-import './style.css';
 const { RangePicker } = DatePicker;
 
 export const DateTimePicker = () => {
@@ -28,7 +27,7 @@ export const DateTimePicker = () => {
   };
 
   return (
-    <Space size={10}>
+    <Space size={20}>
       <RangePicker
         size="large"
         showTime
@@ -36,7 +35,6 @@ export const DateTimePicker = () => {
         value={dateTimeValues}
       />
       <Button
-        // shape="round"
         size="large"
         type="primary"
         onClick={onClick}
