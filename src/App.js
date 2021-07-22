@@ -1,11 +1,16 @@
 import './App.css';
-import { Button } from 'antd';
-import 'antd/dist/antd.dark.css';
+import 'antd/dist/antd.css';
+import { DateTimePicker } from './components/DateTimePicker/';
+import { AmountInput } from './components/AmountInput/';
+import { Space } from 'antd';
 
 function App() {
   return (
     <div className="App">
-      <Button type="primary">Button</Button>
+      <Space direction="vertical" size={10}>
+        <DateTimePicker />
+        <AmountInput />
+      </Space>
     </div>
   );
 }
