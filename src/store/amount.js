@@ -1,8 +1,5 @@
 const initialState = {
-  current: {
-    displayValue: 0,
-    wholeNumberValue: 0,
-  },
+  current: 0,
   profitInfo: {
     bought: 0,
     profit: 0,
@@ -12,13 +9,13 @@ const initialState = {
 };
 
 // reducer
-export function amountReducer(state = initialState, action) {
-  switch (action.type) {
+export function amountReducer(state = initialState, { type, payload }) {
+  switch (type) {
     case AMOUNT_CHANGED: {
-      return { ...state, current: { ...action.payload } };
+      return { ...state, current: payload };
     }
     case PROFIT_INFO_CHANGED: {
-      return { ...state, profitInfo: { ...action.paylod } };
+      return { ...state, profitInfo: { ...payload } };
     }
     default: {
       return state;
@@ -27,8 +24,8 @@ export function amountReducer(state = initialState, action) {
 }
 
 //selectors
-export const getCurrentAmount = (state) => state.current;
-export const getProfitInfo = (state) => state.profitInfo;
+export const getCurrentAmount = (state) => state.amount.current;
+export const getProfitInfo = (state) => state.amount.profitInfo;
 
 //action types
 export const AMOUNT_CHANGED = 'amount/amountChanged';

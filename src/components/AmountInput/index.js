@@ -1,13 +1,23 @@
 import { InputNumber } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
+import { getCurrentAmount, changeAmount } from '../../store/amount';
 
-export const AmountInput = ({ value }) => {
-  const parser = (value) => {
-    console.log(value, ' KUR ', typeof value);
+export const AmountInput = () => {
+  const dispatch = useDispatch();
+  const amount = useSelector(getCurrentAmount);
+
+  const onChange = (value) => {
+    dispatch(changeAmount(value));
+  };
+
+  const formatter = (value) => {
+    console.log('In formatter: ', value);
     return value;
   };
 
-  const onChange = (value) => {
-    console.log('ON CHANGE: ', value);
+  const parser = (value) => {
+    console.log('In parser: ', value);
+    return value;
   };
 
   return (
@@ -18,10 +28,10 @@ export const AmountInput = ({ value }) => {
       max={100000}
       min={0}
       onChange={onChange}
-      value={value}
+      value={amount}
       placeholder="Insert Amount"
       // formatter={formatter}
-      parser={parser}
+      // parser={parser}
     />
   );
 };

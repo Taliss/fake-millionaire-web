@@ -1,4 +1,5 @@
 import { getPoints } from '../api';
+import { FALLBACK_ERROR_MESSAGE } from '../constants';
 
 const initialState = {
   buyPoint: { dateTime: '', price: 0 },
@@ -58,9 +59,7 @@ export const getBuySellPoints = (payload) => (dispatch) => {
       dispatch({
         type: GET_BUY_SELL_POINTS_ERROR,
         payload: {
-          message:
-            (err && err.message) ||
-            'We are expiriencing troubles right now, please try again later',
+          message: (err && err.message) || FALLBACK_ERROR_MESSAGE,
         },
       });
     });
