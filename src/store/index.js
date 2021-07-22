@@ -1,17 +1,14 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-const initialState = {
-  startDateTime: '',
-  endDateTime: '',
-};
-
-const rootReducer = (state = initialState, action) => {
-  return state;
-};
+import { amountReducer } from './amount';
+import { millionaireReducer } from './millionaire';
 
 export const store = createStore(
-  rootReducer,
+  combineReducers({
+    millionaire: millionaireReducer,
+    amount: amountReducer,
+  }),
   composeWithDevTools(applyMiddleware(thunk))
 );

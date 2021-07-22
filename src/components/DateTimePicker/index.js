@@ -4,10 +4,14 @@ import './style.css';
 
 const { RangePicker } = DatePicker;
 
-export const DateTimePicker = ({ onChange }) => {
+export const DateTimePicker = () => {
+  const onChange = (value, dateStrings) => {
+    console.log(dateStrings, ' TUKA');
+  };
+
   return (
     <Space size={20}>
-      <RangePicker size="large" showTime />
+      <RangePicker size="large" showTime onChange={onChange} />
       <Button shape="round" size="large" type="primary">
         Make me rich
       </Button>
