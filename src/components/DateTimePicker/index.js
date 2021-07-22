@@ -14,13 +14,13 @@ export const DateTimePicker = () => {
   const status = useSelector(getBuySellPointsStatus);
 
   const [dateTimeValues, setDateTimeValues] = useState([]);
-  const [startDateTime, endDateTime] = dateTimeValues;
+  const [startDateTimeMoment, endDateTimeMoment] = dateTimeValues;
 
   const isLoading = status === 'loading';
-  const isDisabled = !startDateTime || !endDateTime;
+  const isDisabled = !startDateTimeMoment || !endDateTimeMoment;
 
-  const onChange = (value, dateStrings) => {
-    setDateTimeValues(dateStrings);
+  const onChange = (startEndTimeMoments) => {
+    setDateTimeValues(startEndTimeMoments);
   };
 
   const onClick = () => {
@@ -29,7 +29,12 @@ export const DateTimePicker = () => {
 
   return (
     <Space size={20}>
-      <RangePicker size="large" showTime onChange={onChange} />
+      <RangePicker
+        size="large"
+        showTime
+        onChange={onChange}
+        value={dateTimeValues}
+      />
       <Button
         shape="round"
         size="large"
