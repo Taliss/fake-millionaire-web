@@ -28,7 +28,7 @@ export const DateTimePicker = () => {
   };
 
   return (
-    <Space size={20}>
+    <Space size={10}>
       <RangePicker
         size="large"
         showTime
@@ -36,7 +36,7 @@ export const DateTimePicker = () => {
         value={dateTimeValues}
       />
       <Button
-        shape="round"
+        // shape="round"
         size="large"
         type="primary"
         onClick={onClick}

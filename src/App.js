@@ -2,15 +2,22 @@ import './App.css';
 import 'antd/dist/antd.css';
 import { DateTimePicker } from './components/DateTimePicker/';
 import { AmountInput } from './components/AmountInput/';
-import { Space } from 'antd';
+import { Space, Row, Col } from 'antd';
 
 function App() {
   return (
     <div className="App">
-      <Space direction="vertical" size={10}>
-        <DateTimePicker />
-        <AmountInput />
-      </Space>
+      <Row gutter={[24, 16]}>
+        <Col className="gutter-row" span={18} offset={1}>
+          <Space size={50}>
+            <AmountInput />
+            <DateTimePicker />
+          </Space>
+        </Col>
+        <Col className="gutter-row" span={20}>
+          <div className="dataContainer"> Data Container </div>
+        </Col>
+      </Row>
     </div>
   );
 }
