@@ -1,6 +1,8 @@
+import { getPoints } from '../api';
+
 const initialState = {
-  buyPoint: { startDate: '', price: 0 },
-  sellPoint: { startDate: '', price: 0 },
+  buyPoint: { dateTime: '', price: 0 },
+  sellPoint: { dateTime: '', price: 0 },
   error: null,
   status: 'idle',
 };
@@ -8,7 +10,7 @@ const initialState = {
 // reducer
 export function millionaireReducer(state = initialState, { type, payload }) {
   switch (type) {
-    case GET_BUY_SELL_POINTS_LOADING: {
+    case GET_BUY_SELL_POINTS: {
       return { ...state, status: 'loading' };
     }
     case GET_BUY_SELL_POINTS_SUCCESS: {
@@ -28,15 +30,38 @@ export function millionaireReducer(state = initialState, { type, payload }) {
 }
 
 //selectors
-export const getBuySellPointsStatus = (state) => state.status;
-export const getBuySellPointsErrorStatus = (state) => state.error;
+export const getBuySellPointsStatus = (state) => state.millionaire.status;
+export const getBuySellPointsErrorStatus = (state) => state.millionaire.error;
 export const getBuySellBoints = (state) => ({
-  buyPoint: state.buyPoint,
-  sellPoint: state.sellPoint,
+  buyPoint: state.millionaire.buyPoint,
+  sellPoint: state.millionaire.sellPoint,
 });
 
 //action types
-export const GET_BUY_SELL_POINTS_LOADING = 'millionaire:get/buySellPoints';
+export const GET_BUY_SELL_POINTS = 'millionaire:get/buySellPoints';
 export const GET_BUY_SELL_POINTS_SUCCESS =
   'millionaire:get:success/buySellPoints';
 export const GET_BUY_SELL_POINTS_ERROR = 'millionaire:get:error/buySellPoints';
+
+export const getBuySellPoints = (payload) => (dispatch) => {
+  dispatch({
+    type: GET_BUY_SELL_POINTS,
+  });
+  getPoints(payload)
+    .then((response) => {
+      dispatch({
+        type: GET_BUY_SELL_POINTS_SUCCESS,
+        payload: response.buySellPoints,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: GET_BUY_SELL_POINTS_ERROR,
+        payload: {
+          message:
+            (err && err.message) ||
+            'We are expiriencing troubles right now, please try again later',
+        },
+      });
+    });
+};

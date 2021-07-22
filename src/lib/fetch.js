@@ -8,8 +8,8 @@ const sleep = (time) => new Promise((res) => setTimeout(res, time));
 export async function fetch(url) {
   await sleep(1000);
   const buySellPoints = {
-    buyPoint: { date: '2021-07-22T08:54:58.406Z', price: 5 },
-    sellPoint: { date: '2021-07-22T04:54:58.406Z', price: 10 },
+    buyPoint: { dateTime: '2021-07-22T08:54:58.406Z', price: 5 },
+    sellPoint: { dateTime: '2021-07-22T04:54:58.406Z', price: 10 },
   };
   return {
     // simulate the JSON method on the fetch response
