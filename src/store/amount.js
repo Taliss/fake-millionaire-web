@@ -1,4 +1,5 @@
 import { CLEAR_DATE_TIME_SLICE } from './common';
+import { getBuySellBoints } from './millionaire';
 
 const initialState = {
   current: 0,
@@ -15,11 +16,14 @@ export function amountReducer(state = initialState, { type, payload }) {
     case AMOUNT_CHANGED: {
       return { ...state, current: payload };
     }
-    case PROFIT_INFO_CHANGED: {
+    case PROFIT_INFO_RECALCULATED: {
       return { ...state, profitInfo: { ...payload } };
     }
     case CLEAR_DATE_TIME_SLICE: {
-      return { ...state, profitInfo: { ...initialState.profitInfo } };
+      return { ...state, profitInfo: initialState.profitInfo };
+    }
+    case AMOUNT_RESETED: {
+      return initialState;
     }
     default: {
       return state;
@@ -33,7 +37,8 @@ export const getProfitInfo = (state) => state.amount.profitInfo;
 
 //action types
 export const AMOUNT_CHANGED = 'amount/amountChanged';
-export const PROFIT_INFO_CHANGED = 'amount/profitInfoChanged';
+export const PROFIT_INFO_RECALCULATED = 'amount/profitInfoRecalculated';
+const AMOUNT_RESETED = 'amount/reseted';
 
 // action creators
 export const changeAmount = (amount) => ({
@@ -41,4 +46,26 @@ export const changeAmount = (amount) => ({
   payload: amount,
 });
 
-const calculateProfit = () => {};
+export const recalculateProfitInfo = () => (dispatch, getState) => {
+  const state = getState();
+  const amount = getCurrentAmount(state);
+  const { buyPoint, sellPoint } = getBuySellBoints(state);
+
+  if (buyPoint.price && sellPoint.price && amount) {
+    const stocksAmount = Math.floor(amount / buyPoint.price);
+    const amountSpend = stocksAmount * buyPoint.price;
+
+    dispatch({
+      type: PROFIT_INFO_RECALCULATED,
+      payload: {
+        bought: stocksAmount,
+        sold: stocksAmount,
+        profit: stocksAmount * sellPoint.price - amountSpend,
+      },
+    });
+  }
+};
+
+export const amountReseted = () => ({
+  type: AMOUNT_RESETED,
+});

@@ -19,9 +19,7 @@ export const DateTimePicker = () => {
   const isDisabled = !dateTimeValues || !dateTimeValues.length;
 
   const onChange = (startEndTimeMoments) => {
-    console.log(startEndTimeMoments, ' tuka');
     if (!startEndTimeMoments) {
-      console.log('a?');
       dispatch(clearDateTimeSlice());
     }
     setDateTimeValues(startEndTimeMoments);

@@ -1,6 +1,7 @@
 import { getPoints } from '../api';
 import { FALLBACK_ERROR_MESSAGE } from '../constants';
 import { CLEAR_DATE_TIME_SLICE } from './common';
+import { recalculateProfitInfo } from './amount';
 
 const initialState = {
   buyPoint: { dateTime: '', price: 0 },
@@ -62,6 +63,8 @@ export const getBuySellPoints = (payload) => (dispatch) => {
         type: GET_BUY_SELL_POINTS_SUCCESS,
         payload: response.buySellPoints,
       });
+
+      dispatch(recalculateProfitInfo());
     })
     .catch((err) => {
       dispatch({

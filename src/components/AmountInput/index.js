@@ -1,24 +1,27 @@
 import { InputNumber } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCurrentAmount, changeAmount } from '../../store/amount';
+import debounce from 'lodash.debounce';
+import {
+  getCurrentAmount,
+  changeAmount,
+  amountReseted,
+  recalculateProfitInfo,
+} from '../../store/amount';
 
 export const AmountInput = () => {
   const dispatch = useDispatch();
   const amount = useSelector(getCurrentAmount);
 
   const onChange = (value) => {
-    dispatch(changeAmount(value));
+    if (value) {
+      dispatch(changeAmount(value));
+      dispatch(recalculateProfitInfo());
+    } else {
+      dispatch(amountReseted());
+    }
   };
 
-  const formatter = (value) => {
-    console.log('In formatter: ', value);
-    return value;
-  };
-
-  const parser = (value) => {
-    console.log('In parser: ', value);
-    return value;
-  };
+  const debouncedOnChange = debounce(onChange, 100);
 
   return (
     <InputNumber
@@ -27,11 +30,10 @@ export const AmountInput = () => {
       size="large"
       max={10000}
       min={0}
-      onChange={onChange}
+      onChange={debouncedOnChange}
       value={amount}
       placeholder="Insert Amount"
-      // formatter={formatter}
-      // parser={parser}
+      step={50}
     />
   );
 };
