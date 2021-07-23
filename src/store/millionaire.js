@@ -1,5 +1,4 @@
 import { getPoints } from '../api';
-import { FALLBACK_ERROR_MESSAGE } from '../constants';
 import { CLEAR_DATE_TIME_SLICE } from './common';
 import { recalculateProfitInfo } from './amount';
 
@@ -29,8 +28,8 @@ export function millionaireReducer(state = initialState, { type, payload }) {
     case CLEAR_DATE_TIME_SLICE: {
       return {
         ...state,
-        buyPoint: { ...initialState.buyPoint },
-        sellPoint: { ...initialState.sellPoint },
+        buyPoint: initialState.buyPoint,
+        sellPoint: initialState.sellPoint,
       };
     }
     default: {
@@ -53,15 +52,15 @@ export const GET_BUY_SELL_POINTS_SUCCESS =
   'millionaire:get:success/buySellPoints';
 export const GET_BUY_SELL_POINTS_ERROR = 'millionaire:get:error/buySellPoints';
 
-export const getBuySellPoints = (payload) => (dispatch) => {
+export const getBuySellPoints = (start, end) => (dispatch) => {
   dispatch({
     type: GET_BUY_SELL_POINTS,
   });
-  getPoints(payload)
+  getPoints(start, end)
     .then((response) => {
       dispatch({
         type: GET_BUY_SELL_POINTS_SUCCESS,
-        payload: response.buySellPoints,
+        payload: response,
       });
 
       dispatch(recalculateProfitInfo());
@@ -70,7 +69,7 @@ export const getBuySellPoints = (payload) => (dispatch) => {
       dispatch({
         type: GET_BUY_SELL_POINTS_ERROR,
         payload: {
-          message: (err && err.message) || FALLBACK_ERROR_MESSAGE,
+          message: err.message,
         },
       });
     });

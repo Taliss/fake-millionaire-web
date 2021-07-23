@@ -13,20 +13,22 @@ export const DateTimePicker = () => {
   const dispatch = useDispatch();
   const status = useSelector(getBuySellPointsStatus);
 
-  const [dateTimeValues, setDateTimeValues] = useState([]);
+  const [dateTimeMoments, setDateTimeMoments] = useState([]);
 
   const isLoading = status === 'loading';
-  const isDisabled = !dateTimeValues || !dateTimeValues.length;
+  const isDisabled = !dateTimeMoments || !dateTimeMoments.length;
 
-  const onChange = (startEndTimeMoments) => {
-    if (!startEndTimeMoments) {
+  const onChange = (startEndDateTimeMoments) => {
+    // TODO: Missing in antd documentation. This could also be a null.
+    if (!startEndDateTimeMoments) {
       dispatch(clearDateTimeSlice());
     }
-    setDateTimeValues(startEndTimeMoments);
+    setDateTimeMoments(startEndDateTimeMoments);
   };
 
   const onClick = () => {
-    dispatch(getBuySellPoints());
+    const [startMoment, endMoment] = dateTimeMoments;
+    dispatch(getBuySellPoints(startMoment, endMoment));
   };
 
   return (
@@ -35,7 +37,7 @@ export const DateTimePicker = () => {
         size="large"
         showTime
         onChange={onChange}
-        value={dateTimeValues}
+        value={dateTimeMoments}
       />
       <Button
         size="large"
