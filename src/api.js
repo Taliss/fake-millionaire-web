@@ -25,11 +25,11 @@ export const getPoints = (start, end) => {
       }
 
       // when res failed and no errors info - fallback to front-end default error message
-      if (!data && (!data.errors || data.errors.length === 0)) {
+      if (!data || !data.errors || data.errors.length === 0) {
         return Promise.reject({ message: FALLBACK_ERROR_MESSAGE });
       }
 
-      // default validation errors from swagger. Message from first error should be enough
+      // validation errors from swagger and server error-handler. Message from first error should be enough
       return Promise.reject({ message: data.errors[0].message });
     });
 };
