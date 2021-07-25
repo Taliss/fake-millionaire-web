@@ -60,7 +60,9 @@ export const recalculateProfitInfo = () => (dispatch, getState) => {
       payload: {
         bought: stocksAmount,
         sold: stocksAmount,
-        profit: stocksAmount * sellPoint.price - amountSpend,
+        profit: stocksAmount
+          ? (stocksAmount * sellPoint.price - amountSpend).toFixed(2)
+          : 0,
       },
     });
   }

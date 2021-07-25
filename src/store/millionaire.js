@@ -25,12 +25,12 @@ export function millionaireReducer(state = initialState, { type, payload }) {
     case GET_BUY_SELL_POINTS_ERROR: {
       return { ...initialState, error: payload.message };
     }
+
+    case NO_SOLUTION_FOUND: {
+      return { ...initialState, status: 'noSolution' };
+    }
     case CLEAR_DATE_TIME_SLICE: {
-      return {
-        ...state,
-        buyPoint: initialState.buyPoint,
-        sellPoint: initialState.sellPoint,
-      };
+      return initialState;
     }
     default: {
       return state;
@@ -51,6 +51,7 @@ export const GET_BUY_SELL_POINTS = 'millionaire:get/buySellPoints';
 export const GET_BUY_SELL_POINTS_SUCCESS =
   'millionaire:get:success/buySellPoints';
 export const GET_BUY_SELL_POINTS_ERROR = 'millionaire:get:error/buySellPoints';
+const NO_SOLUTION_FOUND = 'milliionare:get:success/noSolutionFound';
 
 export const getBuySellPoints = (start, end) => (dispatch) => {
   dispatch({
@@ -58,12 +59,17 @@ export const getBuySellPoints = (start, end) => (dispatch) => {
   });
   getPoints(start, end)
     .then((response) => {
-      dispatch({
-        type: GET_BUY_SELL_POINTS_SUCCESS,
-        payload: response,
-      });
-
-      dispatch(recalculateProfitInfo());
+      if (response.buyPoint && response.sellPoint) {
+        dispatch({
+          type: GET_BUY_SELL_POINTS_SUCCESS,
+          payload: response,
+        });
+        dispatch(recalculateProfitInfo());
+      } else {
+        dispatch({
+          type: NO_SOLUTION_FOUND,
+        });
+      }
     })
     .catch((err) => {
       dispatch({
